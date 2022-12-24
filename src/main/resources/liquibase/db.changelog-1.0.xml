@@ -1,0 +1,152 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1.0.0" author="Andrey Galanov">
+        <createTable tableName="news">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="my_news" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="theme_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="Andrey Galanov">
+        <createTable tableName="sources">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="source" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="AndreyGalanov">
+        <createTable tableName="themes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="theme" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="source_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="AndreyGalanov">
+        <addForeignKeyConstraint baseColumnNames="source_id"
+                                 baseTableName="themes"
+                                 constraintName="fk_themes_source"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sources"/>
+    </changeSet>
+
+    <changeSet id="1.0.4" author="AndreyGalanov">
+        <addForeignKeyConstraint baseColumnNames="theme_id"
+                                 baseTableName="news"
+                                 constraintName="fk_news_theme"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="themes"/>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="Andrey Galanov">
+        <insert tableName="sources">
+            <column name="id" value="1"/>
+            <column name="source" value="irbis.plus"/>
+        </insert>
+        <insert tableName="sources">
+            <column name="id" value="2"/>
+            <column name="source" value="praktika.irbis.plus"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="Andrey Galanov">
+        <insert tableName="themes">
+            <column name="id" value="1"/>
+            <column name="theme" value="Помощь юр. лицам"/>
+            <column name="source_id" value="1"/>
+        </insert>
+
+        <insert tableName="themes">
+            <column name="id" value="2"/>
+            <column name="theme" value="Помощь физ. лицам"/>
+            <column name="source_id" value="1"/>
+        </insert>
+
+        <insert tableName="themes">
+            <column name="id" value="3"/>
+            <column name="theme" value="О нас"/>
+            <column name="source_id" value="1"/>
+        </insert>
+
+        <insert tableName="themes">
+            <column name="id" value="4"/>
+            <column name="theme" value="Обновление сервиса"/>
+            <column name="source_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="Andrey Galanov">
+        <insert tableName="news">
+            <column name="id" value="1"/>
+            <column name="my_news" value="Обновления законодательства в 2022 году"/>
+            <column name="theme_id" value="1"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="2"/>
+            <column name="my_news" value="Обновления законодательства в 2023"/>
+            <column name="theme_id" value="1"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="3"/>
+            <column name="my_news" value="Рассказываем о том, как обезопасить себя от мошенников"/>
+            <column name="theme_id" value="2"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="4"/>
+            <column name="my_news" value="Рассказываем о том, как отдыхают наши работники"/>
+            <column name="theme_id" value="3"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="5"/>
+            <column name="my_news" value="Знакомим с нашими клиентами. Часть 1"/>
+            <column name="theme_id" value="3"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="6"/>
+            <column name="my_news" value="Знакомим с нашими клиентами. Часть 2"/>
+            <column name="theme_id" value="3"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="7"/>
+            <column name="my_news" value="Знакомство с сервисом"/>
+            <column name="theme_id" value="4"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="id" value="8"/>
+            <column name="my_news" value='Нововведения во вкладке "Суды"'/>
+            <column name="theme_id" value="4"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
