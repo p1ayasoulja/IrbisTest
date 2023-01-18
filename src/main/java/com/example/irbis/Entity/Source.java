@@ -1,7 +1,8 @@
 package com.example.irbis.Entity;
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity

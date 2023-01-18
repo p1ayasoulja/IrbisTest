@@ -1,6 +1,6 @@
 package com.example.irbis.Entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "news")
@@ -8,6 +8,7 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "my_news")
     private String MyNews;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "theme_id")
